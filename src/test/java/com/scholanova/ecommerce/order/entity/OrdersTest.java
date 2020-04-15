@@ -4,6 +4,7 @@ import com.scholanova.ecommerce.cart.entity.Cart;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,13 +16,13 @@ class OrdersTest {
     public void checkout_ShouldSetTheDateAndTimeOfTodayInTheOrder(){
 
         Orders order = new Orders();
-        Date currentDate = new Date(System.currentTimeMillis());
+        Date dat = new Date(Instant.now().toEpochMilli());
 
         //when
         order.checkout();
 
         //then
-        assertThat(order.getIssueDate()).isEqualTo(currentDate);
+        assertThat(order.getIssueDate()).isEqualTo(dat);
     }
 
     @Test

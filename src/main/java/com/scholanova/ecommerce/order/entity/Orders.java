@@ -32,10 +32,9 @@ public class Orders {
     public Orders() {
     }
 
-    public void createOrder(){
+    public void createOrder(Cart cart){
         //TODO
 
-        Cart cart = new Cart();
         this.setCart(cart);
         this.setStatus(OrderStatus.CREATED);
     }
