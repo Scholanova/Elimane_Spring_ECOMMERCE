@@ -6,6 +6,7 @@ import com.sun.xml.bind.v2.TODO;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.Instant;
 
 @Entity(name="orders")
 public class Orders {
@@ -33,22 +34,34 @@ public class Orders {
 
     public void createOrder(){
         //TODO
+
+        Cart cart = new Cart();
+        this.setCart(cart);
+        this.setStatus(OrderStatus.CREATED);
     }
 
     public void checkout(){
-        //TODO
+        this.issueDate = new Date(Instant.now().toEpochMilli());
+        this.status = OrderStatus.PENDING;
     }
 
     public void getDiscount(){
         //TODO
+        return cart.getTotalPrice();
+
     }
 
     public void getOrderPrice(){
         //TODO
+        double totalPrice = this.getCart().getTotalPrice().doubleValue();
+        double discount = this.getCart().getTotalPrice() * getDiscount();
+        return totalPrice - discount;
     }
 
     public void close(){
         //TODO
+        setStatus(OrderStatus.CLOSED);
+
     }
 
 
